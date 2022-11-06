@@ -6,32 +6,32 @@
 static machine_state_t machineState = { 0 };
 static int halt_machine = 0;
 
-void halt() {
+void halt(void) {
     halt_machine = 1;
     machineState.ip++;
 }
 
-void clrA() {
+void clrA(void) {
     machineState.accumulator = 0;
     machineState.ip++;
 }
 
-void inc3A() {
+void inc3A(void) {
     machineState.accumulator += 3;
     machineState.ip++;
 }
 
-void decA() {
+void decA(void) {
     machineState.accumulator--;
     machineState.ip++;
 }
 
-void setL() {
+void setL(void) {
     machineState.loop_counter = machineState.accumulator;
     machineState.ip++;
 }
 
-void back7() {
+void back7(void) {
     machineState.loop_counter--;
     if (machineState.loop_counter >= 0) {
         machineState.ip -= 7;
@@ -40,7 +40,7 @@ void back7() {
     }
 }
 
-int main_loop(const char* code) {
+void main_loop(const char* code) {
     instruction_t inst;
     while (!halt_machine) {
         inst = code[machineState.ip];
@@ -70,7 +70,7 @@ int main_loop(const char* code) {
     }
 }
 
-int main() {
+int main(void) {
     int prob[] = {0, 1, 0, 0, 0};
     int32_t zero = 0;
     char code[10000];
