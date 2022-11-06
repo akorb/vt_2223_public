@@ -1,28 +1,12 @@
 #include <stdio.h>
-#include <stdint.h>
 #include <stdlib.h>
+#include "source_machine.h"
 #include "gen.h"
-
-typedef struct {
-    uint32_t ip;
-    int32_t accumulator;
-    int32_t loop_counter;
-} machine_state_t;
-
-// Changing default values of enum constants
-enum instruction {
-    HALT = 0,
-    CLRA = 1,
-    INC3A = 2,
-    DECA = 3,
-    SETL = 4,
-    BACK7 = 5,
-};
 
 typedef unsigned char instruction_t;
 
-machine_state_t machineState = { 0 };
-int halt_machine = 0;
+static machine_state_t machineState = { 0 };
+static int halt_machine = 0;
 
 void halt() {
     halt_machine = 1;
