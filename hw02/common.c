@@ -16,7 +16,7 @@ int main(void) {
     int prob[] = {0, 1, 0, 0, 0};
     int32_t zero = 0;
     instruction_t code[10000];
-    init(code, 10000, prob, 1, &zero, &zero);
+    init(code, 10000, prob, 1, &machineState.accumulator, &machineState.loop_counter);
 
     main_loop(code, 10000);
 
