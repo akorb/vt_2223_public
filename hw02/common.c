@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "source_machine.h"
 #include "gen.h"
 
@@ -12,14 +13,25 @@ void printMachineState(void) {
            "  L: %i\n", machineState.ip, machineState.accumulator, machineState.loop_counter);
 }
 
-int main(void) {
-    int prob[] = {0, 1, 0, 0, 0};
-    int32_t zero = 0;
-    instruction_t code[10000];
-    init(code, 10000, prob, 1, &machineState.accumulator, &machineState.loop_counter);
+/**
+ * argv[1-5]: probabilities
+ * argv[6]:   seed
+ * argv[7]:   code size
+ */
+int main(int argc, const char* argv[]) {
+    if (argc != 8) {
+        printf("Expected args: 7, given args: %i\n", argc - 1);
+        return EXIT_FAILURE;
+    }
 
-    main_loop(code, 10000);
+    int prob[] = {atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), atoi(argv[5])};
+    int seed = atoi(argv[6]);
+    int codeSize = atoi(argv[7]);
+    instruction_t code[codeSize];
+    init(code, codeSize, prob, seed, &machineState.accumulator, &machineState.loop_counter);
+
+    main_loop(code, codeSize);
 
     printMachineState();
-    return 0;
+    return EXIT_SUCCESS;
 }
