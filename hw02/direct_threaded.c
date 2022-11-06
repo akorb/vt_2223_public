@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "source_machine.h"
 #include "gen.h"
 
@@ -47,10 +46,7 @@ back7:
     DISPATCH(0);
 
 exit:
-    printf("Final state:\n"
-           "ip: %u\n"
-           "A: %i\n"
-           "L: %i\n", machineState.ip, machineState.accumulator, machineState.loop_counter);
+    printMachineState(machineState);
 }
 
 int main(void) {

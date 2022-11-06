@@ -78,9 +78,6 @@ int main(void) {
 
     main_loop(code);
 
-    printf("Final state:\n"
-           "ip: %u\n"
-           "A: %i\n"
-           "L: %i\n", machineState.ip, machineState.accumulator, machineState.loop_counter);
+    printMachineState(machineState);
     return 0;
 }

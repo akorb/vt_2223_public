@@ -9,6 +9,8 @@ typedef struct {
     int32_t loop_counter;
 } machine_state_t;
 
+void printMachineState(machine_state_t machineState);
+
 enum instruction {
     HALT = 0,
     CLRA = 1,
