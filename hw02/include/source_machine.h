@@ -9,7 +9,6 @@ typedef struct {
     int32_t loop_counter;
 } machine_state_t;
 
-// Changing default values of enum constants
 enum instruction {
     HALT = 0,
     CLRA = 1,
@@ -18,5 +17,7 @@ enum instruction {
     SETL = 4,
     BACK7 = 5,
 };
+
+typedef unsigned char instruction_t;
 
 #endif //VT2223_SOURCE_MACHINE_H

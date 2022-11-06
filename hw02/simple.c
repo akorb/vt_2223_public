@@ -3,8 +3,6 @@
 #include "source_machine.h"
 #include "gen.h"
 
-typedef unsigned char instruction_t;
-
 static machine_state_t machineState = { 0 };
 static int halt_machine = 0;
 
