@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "source_machine.h"
-#include "gen.h"
 
-static machine_state_t machineState = { 0 };
+machine_state_t machineState = { 0 };
 static int halt_machine = 0;
 
 void halt(void) {
@@ -40,7 +39,9 @@ void back7(void) {
     }
 }
 
-void main_loop(const instruction_t *code) {
+void main_loop(const instruction_t *code, int size) {
+    (void)size;
+
     instruction_t inst;
     while (!halt_machine) {
         inst = code[machineState.ip];
@@ -68,16 +69,4 @@ void main_loop(const instruction_t *code) {
                 exit(1);
         }
     }
-}
-
-int main(void) {
-    int prob[] = {0, 1, 0, 0, 0};
-    int32_t zero = 0;
-    instruction_t code[10000];
-    init(code, 10000, prob, 1, &zero, &zero);
-
-    main_loop(code);
-
-    printMachineState(machineState);
-    return 0;
 }

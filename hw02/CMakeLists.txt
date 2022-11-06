@@ -7,6 +7,6 @@ add_compile_options(-Wall -Wextra -Werror)
 
 include_directories(include)
 
-add_executable(simple simple.c gen.c include/source_machine.h source_machine.c)
-add_executable(indirect_threaded indirect_threaded.c gen.c include/source_machine.h source_machine.c)
-add_executable(direct_threaded direct_threaded.c gen.c include/source_machine.h source_machine.c)
+add_executable(simple common.c simple.c gen.c include/source_machine.h)
+add_executable(indirect_threaded common.c indirect_threaded.c gen.c include/source_machine.h)
+add_executable(direct_threaded common.c direct_threaded.c gen.c include/source_machine.h)

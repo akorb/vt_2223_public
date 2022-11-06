@@ -1,12 +1,13 @@
 #include "source_machine.h"
-#include "gen.h"
 
-static machine_state_t machineState = {0};
+machine_state_t machineState = {0};
 
 #define DISPATCH(INC) if (INC == 1) { machineState.ip++; } inst = code[machineState.ip]; goto *dispatch[inst];
 
 
-void main_loop(const instruction_t *code) {
+void main_loop(const instruction_t *code, int size) {
+    (void)size;
+
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};
     instruction_t inst;
 
@@ -42,16 +43,5 @@ back7:
     DISPATCH(0);
 
 exit:
-    printMachineState(machineState);
-}
-
-int main(void) {
-    int prob[] = {0, 1, 0, 0, 0};
-    int32_t zero = 0;
-    instruction_t code[10000];
-    init(code, 10000, prob, 1, &zero, &zero);
-
-    main_loop(code);
-
-    return 0;
+    ;
 }
