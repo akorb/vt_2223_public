@@ -40,7 +40,7 @@ void back7(void) {
     }
 }
 
-void main_loop(const char* code) {
+void main_loop(const instruction_t *code) {
     instruction_t inst;
     while (!halt_machine) {
         inst = code[machineState.ip];
@@ -73,7 +73,7 @@ void main_loop(const char* code) {
 int main(void) {
     int prob[] = {0, 1, 0, 0, 0};
     int32_t zero = 0;
-    char code[10000];
+    instruction_t code[10000];
     init(code, 10000, prob, 1, &zero, &zero);
 
     main_loop(code);

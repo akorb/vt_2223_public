@@ -3,8 +3,8 @@
 
 int myrand(int s);
 
-int get_random_opc(int ps[5]);
+int get_random_opc(const int ps[5]);
 
-void init(char* buf, int size, int prob[5], int seed, int* rA, int* rL);
+void init(instruction_t* buf, int size, const int prob[5], int seed, int* rA, int* rL);
 
 #endif //VT2223_GEN_H

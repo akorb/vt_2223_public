@@ -18,6 +18,6 @@ enum instruction {
     BACK7 = 5,
 };
 
-typedef unsigned char instruction_t;
+typedef uint8_t instruction_t;
 
 #endif //VT2223_SOURCE_MACHINE_H

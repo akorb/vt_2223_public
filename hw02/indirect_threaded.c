@@ -7,7 +7,7 @@ static machine_state_t machineState = {0};
 #define DISPATCH(INC) if (INC == 1) { machineState.ip++; } inst = code[machineState.ip]; goto *dispatch[inst];
 
 
-void main_loop(const char *code) {
+void main_loop(const instruction_t *code) {
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};
     instruction_t inst;
 
@@ -52,7 +52,7 @@ exit:
 int main(void) {
     int prob[] = {0, 1, 0, 0, 0};
     int32_t zero = 0;
-    char code[10000];
+    instruction_t code[10000];
     init(code, 10000, prob, 1, &zero, &zero);
 
     main_loop(code);

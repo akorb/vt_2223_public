@@ -7,12 +7,12 @@ static machine_state_t machineState = {0};
 #define DISPATCH(INC) if (INC == 1) { machineState.ip++; } goto *predecoded_code[machineState.ip];
 
 
-void main_loop(const char *code, int size) {
+void main_loop(const instruction_t *code, int size) {
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};
 
     void *predecoded_code[size];
     for (int i = 0; i < size; i++) {
-        predecoded_code[i] = dispatch[(int)code[i]];
+        predecoded_code[i] = dispatch[code[i]];
     }
 
     DISPATCH(0);
@@ -56,7 +56,7 @@ exit:
 int main(void) {
     int prob[] = {0, 1, 0, 0, 0};
     int32_t zero = 0;
-    char code[10000];
+    instruction_t code[10000];
     init(code, 10000, prob, 1, &zero, &zero);
 
     main_loop(code, 10000);

@@ -4,6 +4,8 @@
  * See init() function
 */
 
+#include "source_machine.h"
+
 // PRNG: get random 31-bit value if s is null. if s not null, set seed
 int myrand(int s)
 {
@@ -16,7 +18,7 @@ int myrand(int s)
 // get random opcode between 1 and 5.
 // ps[i] is calculated by init() below, and is the sum of relative
 // probabilities up to opcode i+1, e.g. for 5-1-2-1-1 it is [5,6,8,9,10].
-int get_random_opc(int ps[5])
+int get_random_opc(const int ps[5])
 {
   int i, v;
   v = myrand(0) % ps[4];
@@ -33,7 +35,7 @@ int get_random_opc(int ps[5])
 // * <rA> and <rL> point to int values which should be used at start values
 //   for registers A and L when running the opcode sequence. With same
 //   seed, they are guaranteed to be set to the same values.
-void init(char* buf, int size, int prob[5], int seed, int* rA, int* rL)
+void init(instruction_t* buf, int size, const int prob[5], int seed, int* rA, int* rL)
 {
   int i, j, probsum, opc, ps[5];
 
