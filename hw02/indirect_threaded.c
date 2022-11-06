@@ -9,8 +9,8 @@ void main_loop(const instruction_t *code, int size) {
     (void)size;
 
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};
-    instruction_t inst;
 
+    instruction_t inst;
     DISPATCH(0);
 
 halt:
@@ -36,7 +36,7 @@ setL:
 back7:
     machineState.loop_counter--;
     if (machineState.loop_counter >= 0) {
-        machineState.ip -= 7;
+        machineState.ip -= 6;
     } else {
         machineState.ip++;
     }

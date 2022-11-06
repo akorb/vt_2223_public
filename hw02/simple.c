@@ -32,8 +32,8 @@ void setL(void) {
 
 void back7(void) {
     machineState.loop_counter--;
-    if (machineState.loop_counter >= 0) {
-        machineState.ip -= 7;
+    if (machineState.loop_counter > 0) {
+        machineState.ip -= 6;
     } else {
         machineState.ip++;
     }

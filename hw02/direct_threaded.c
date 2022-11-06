@@ -38,7 +38,7 @@ setL:
 back7:
     machineState.loop_counter--;
     if (machineState.loop_counter >= 0) {
-        machineState.ip -= 7;
+        machineState.ip -= 6;
     } else {
         machineState.ip++;
     }
