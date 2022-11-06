@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "source_machine.h"
 #include "gen.h"
 
@@ -30,8 +31,18 @@ int main(int argc, const char* argv[]) {
     instruction_t code[codeSize];
     init(code, codeSize, prob, seed, &machineState.accumulator, &machineState.loop_counter);
 
+    clock_t begin = clock();
     main_loop(code, codeSize);
+    clock_t end = clock();
 
+#ifdef NDEBUG
+    // Print taken time
+    printf("%li\n", end - begin);
+#else
+    (void)begin;
+    (void)end;
     printMachineState();
+#endif
+
     return EXIT_SUCCESS;
 }
