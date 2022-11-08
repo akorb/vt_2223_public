@@ -2,7 +2,14 @@
 
 machine_state_t machineState = {0};
 
-#define DISPATCH(INC) if (INC == 1) { machineState.ip++; } inst = code[machineState.ip]; goto *dispatch[inst];
+#define DISPATCH(INC)                               \
+        do {                                        \
+            if (INC == 1) {                         \
+                machineState.ip++;                  \
+            }                                       \
+            inst = code[machineState.ip];           \
+            goto *dispatch[inst];                   \
+        } while (0)
 
 
 void main_loop(const instruction_t *code, int size) {

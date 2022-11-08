@@ -2,8 +2,13 @@
 
 machine_state_t machineState = {0};
 
-#define DISPATCH(INC) if (INC == 1) { machineState.ip++; } goto *predecoded_code[machineState.ip];
-
+#define DISPATCH(INC)                               \
+        do {                                        \
+            if (INC == 1) {                         \
+                machineState.ip++;                  \
+            }                                       \
+            goto *predecoded_code[machineState.ip]; \
+        } while (0)
 
 void main_loop(const instruction_t *code, int size) {
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};
