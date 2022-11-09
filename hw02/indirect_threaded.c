@@ -20,10 +20,6 @@ void main_loop(const instruction_t *code, int size) {
     instruction_t inst;
     DISPATCH(0);
 
-halt:
-    machineState.ip++;
-    goto exit;
-
 clrA:
     machineState.accumulator = 0;
     DISPATCH(1);
@@ -49,6 +45,6 @@ back7:
     }
     DISPATCH(0);
 
-exit:
-    ;
+halt:
+    machineState.ip++;
 }
