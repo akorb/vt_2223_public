@@ -34,7 +34,7 @@ implementations = ['simple', 'indirect_threaded', 'direct_threaded']
 
 def time_scenario(num, implementation):
     p = subprocess.run([f'cmake-build-release/{implementation}'] + scenarios[num].to_str_list(), capture_output=True)
-    time = int(p.stdout)
+    time = float(p.stdout)
     return time
 
 
@@ -67,7 +67,7 @@ def main():
     ax.legend()
 
     plt.xlabel('Scenario')
-    plt.ylabel('Duration')
+    plt.ylabel('Duration [ms]')
 
     plt.savefig('benchmark.png')
 

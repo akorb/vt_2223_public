@@ -37,7 +37,8 @@ int main(int argc, const char* argv[]) {
 
 #ifdef NDEBUG
     // Print taken time
-    printf("%li\n", end - begin);
+    double msecs = (double)(end - begin) / (CLOCKS_PER_SEC / 1000);
+    printf("%lf\n", msecs);
 #else
     (void)begin;
     (void)end;
