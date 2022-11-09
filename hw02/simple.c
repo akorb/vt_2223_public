@@ -5,32 +5,32 @@
 machine_state_t machineState = { 0 };
 static int halt_machine = 0;
 
-void halt(void) {
+static inline void halt(void) {
     halt_machine = 1;
     machineState.ip++;
 }
 
-void clrA(void) {
+static inline void clrA(void) {
     machineState.accumulator = 0;
     machineState.ip++;
 }
 
-void inc3A(void) {
+static inline void inc3A(void) {
     machineState.accumulator += 3;
     machineState.ip++;
 }
 
-void decA(void) {
+static inline void decA(void) {
     machineState.accumulator--;
     machineState.ip++;
 }
 
-void setL(void) {
+static inline void setL(void) {
     machineState.loop_counter = machineState.accumulator;
     machineState.ip++;
 }
 
-void back7(void) {
+static inline void back7(void) {
     machineState.loop_counter--;
     if (machineState.loop_counter > 0) {
         machineState.ip -= 6;
