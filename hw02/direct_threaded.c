@@ -2,11 +2,8 @@
 
 machine_state_t machineState = {0};
 
-#define DISPATCH(INC)                               \
+#define DISPATCH()                                  \
         do {                                        \
-            if (INC == 1) {                         \
-                machineState.ip++;                  \
-            }                                       \
             goto *predecoded_code[machineState.ip]; \
         } while (0)
 
@@ -18,33 +15,28 @@ void main_loop(const instruction_t *code, int size) {
         predecoded_code[i] = dispatch[code[i]];
     }
 
-    DISPATCH(0);
+    DISPATCH();
 
 clrA:
-    machineState.accumulator = 0;
-    DISPATCH(1);
+    clrA(&machineState);
+    DISPATCH();
 
 inc3A:
-    machineState.accumulator += 3;
-    DISPATCH(1);
+    inc3A(&machineState);
+    DISPATCH();
 
 decA:
-    machineState.accumulator--;
-    DISPATCH(1);
+    decA(&machineState);
+    DISPATCH();
 
 setL:
-    machineState.loop_counter = machineState.accumulator;
-    DISPATCH(1);
+    setL(&machineState);
+    DISPATCH();
 
 back7:
-    machineState.loop_counter--;
-    if (machineState.loop_counter >= 0) {
-        machineState.ip -= 6;
-    } else {
-        machineState.ip++;
-    }
-    DISPATCH(0);
+    back7(&machineState);
+    DISPATCH();
 
 halt:
-    machineState.ip++;
+    halt(&machineState);
 }

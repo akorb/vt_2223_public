@@ -5,40 +5,6 @@
 machine_state_t machineState = { 0 };
 static int halt_machine = 0;
 
-static inline void halt(void) {
-    halt_machine = 1;
-    machineState.ip++;
-}
-
-static inline void clrA(void) {
-    machineState.accumulator = 0;
-    machineState.ip++;
-}
-
-static inline void inc3A(void) {
-    machineState.accumulator += 3;
-    machineState.ip++;
-}
-
-static inline void decA(void) {
-    machineState.accumulator--;
-    machineState.ip++;
-}
-
-static inline void setL(void) {
-    machineState.loop_counter = machineState.accumulator;
-    machineState.ip++;
-}
-
-static inline void back7(void) {
-    machineState.loop_counter--;
-    if (machineState.loop_counter > 0) {
-        machineState.ip -= 6;
-    } else {
-        machineState.ip++;
-    }
-}
-
 void main_loop(const instruction_t *code, int size) {
     (void)size;
 
@@ -47,22 +13,23 @@ void main_loop(const instruction_t *code, int size) {
         inst = code[machineState.ip];
         switch (inst) {
             case HALT:
-                halt();
+                halt(&machineState);
+                halt_machine = 1;
                 break;
             case CLRA:
-                clrA();
+                clrA(&machineState);
                 break;
             case INC3A:
-                inc3A();
+                inc3A(&machineState);
                 break;
             case DECA:
-                decA();
+                decA(&machineState);
                 break;
             case SETL:
-                setL();
+                setL(&machineState);
                 break;
             case BACK7:
-                back7();
+                back7(&machineState);
                 break;
             default:
                 puts("Should not happen!");
