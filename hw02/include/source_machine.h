@@ -44,7 +44,7 @@ static inline void setL(machine_state_t *machineState) {
 
 static inline void back7(machine_state_t *machineState) {
     machineState->loop_counter--;
-    if (machineState->loop_counter >= 0) {
+    if (machineState->loop_counter > 0) {
         machineState->ip -= 6;
     } else {
         machineState->ip++;
