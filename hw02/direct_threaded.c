@@ -9,7 +9,15 @@ void main_loop(const instruction_t *code, int size, machine_state_t machineState
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};
 
     void *predecoded_code[size];
-    for (int i = 0; i < size; i++) {
+    int i;
+    for (i = 0; i < size; i += 4) {
+        predecoded_code[i] = dispatch[code[i]];
+        predecoded_code[i + 1] = dispatch[code[i + 1]];
+        predecoded_code[i + 2] = dispatch[code[i + 2]];
+        predecoded_code[i + 3] = dispatch[code[i + 3]];
+    }
+
+    for (; i < size; i++) {
         predecoded_code[i] = dispatch[code[i]];
     }
 
