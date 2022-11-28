@@ -29,7 +29,7 @@ scenarios = {1: Scenario(probs=[0, 1, 0, 0, 0], seed=1, code_size=10000),
              3: Scenario(probs=[1, 9, 1, 5, 5], seed=1, code_size=10000),
              4: Scenario(probs=[1, 9, 1, 5, 5], seed=1, code_size=50000)}
 
-implementations = ['simple', 'indirect_threaded', 'direct_threaded']
+implementations = ['simple', 'super_events', 'indirect_threaded', 'direct_threaded']
 
 
 def time_scenario(num, implementation):
@@ -59,10 +59,11 @@ def main():
 
     fig, ax = plt.subplots()
 
+    n = len(implementations)
     for i, impl in enumerate(implementations):
         impl_df = df[df['implementation'] == impl]
         means = impl_df.groupby('scenario_num')['time'].mean()
-        ax.bar(x + width * (i - 1), means, width, label=impl, log=True)
+        ax.bar(x + (-((n - 1) / 2) * width + i * width), means, width, label=impl, log=True)
     ax.set_xticks(x, scenarios.keys())
     ax.legend()
 
