@@ -6,7 +6,7 @@
 
 extern void main_loop(const instruction_t *code, int size, machine_state_t machineState);
 
-void printMachineState(machine_state_t machineState) {
+static void printMachineState(machine_state_t machineState) {
     printf("Final state:\n"
            " ip: %u\n"
            "  A: %i\n"
