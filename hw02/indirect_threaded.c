@@ -1,7 +1,5 @@
 #include "source_machine.h"
 
-machine_state_t machineState = {0};
-
 #define DISPATCH()                                      \
         do {                                            \
             instruction_t inst = code[machineState.ip]; \
@@ -9,7 +7,7 @@ machine_state_t machineState = {0};
         } while (0)
 
 
-void main_loop(const instruction_t *code, int size) {
+void main_loop(const instruction_t *code, int size, machine_state_t machineState) {
     (void)size;
 
     void *dispatch[] = {&&halt, &&clrA, &&inc3A, &&decA, &&setL, &&back7};

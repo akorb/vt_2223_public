@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include "source_machine.h"
 
-machine_state_t machineState = { 0 };
 static int halt_machine = 0;
 
-void main_loop(const instruction_t *code, int size) {
+void main_loop(const instruction_t *code, int size, machine_state_t machineState) {
     (void)size;
 
     instruction_t inst;

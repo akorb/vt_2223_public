@@ -4,10 +4,9 @@
 #include "source_machine.h"
 #include "gen.h"
 
-extern machine_state_t machineState;
-extern void main_loop(const instruction_t *code, int size);
+extern void main_loop(const instruction_t *code, int size, machine_state_t machineState);
 
-void printMachineState(void) {
+void printMachineState(machine_state_t machineState) {
     printf("Final state:\n"
            " ip: %u\n"
            "  A: %i\n"
@@ -25,6 +24,8 @@ int main(int argc, const char* argv[]) {
         return EXIT_FAILURE;
     }
 
+    machine_state_t machineState = { 0 };
+
     int prob[] = {atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), atoi(argv[5])};
     int seed = atoi(argv[6]);
     int codeSize = atoi(argv[7]);
@@ -32,7 +33,7 @@ int main(int argc, const char* argv[]) {
     init(code, codeSize, prob, seed, &machineState.accumulator, &machineState.loop_counter);
 
     clock_t begin = clock();
-    main_loop(code, codeSize);
+    main_loop(code, codeSize, machineState);
     clock_t end = clock();
 
 #ifdef NDEBUG
@@ -42,7 +43,7 @@ int main(int argc, const char* argv[]) {
 #else
     (void)begin;
     (void)end;
-    printMachineState();
+    printMachineState(machineState);
 #endif
 
     return EXIT_SUCCESS;
