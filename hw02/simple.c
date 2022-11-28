@@ -1,12 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "source_machine.h"
-
-static int halt_machine = 0;
 
 void main_loop(const instruction_t *code, int size, machine_state_t machineState) {
     (void)size;
 
+    int halt_machine = 0;
     instruction_t inst;
     while (!halt_machine) {
         inst = code[machineState.ip];
@@ -30,9 +27,6 @@ void main_loop(const instruction_t *code, int size, machine_state_t machineState
             case BACK7:
                 back7(&machineState);
                 break;
-            default:
-                puts("Should not happen!");
-                exit(1);
         }
     }
 }

@@ -40,6 +40,7 @@ int main(int argc, const char* argv[]) {
     // Print taken time
     double msecs = (double)(end - begin) / (CLOCKS_PER_SEC / 1000);
     printf("%lf\n", msecs);
+    (void)printMachineState;
 #else
     (void)begin;
     (void)end;
