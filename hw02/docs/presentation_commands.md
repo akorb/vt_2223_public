@@ -4,10 +4,10 @@
 objdump -d --disassemble="main_loop" -M intel cmake-build-release/direct_threaded
 ```
 
-### Show jmp instructions in binary
+### Show jmp instructions in binary and 5 previous instructions
 
 ```shell
-objdump -d --disassemble="main_loop" -M intel cmake-build-release/direct_threaded | grep jmp
+objdump -d --disassemble="main_loop" -M intel cmake-build-release/direct_threaded | grep -B 5 jmp
 ```
 
 ### Compare main_loop function between binaries
