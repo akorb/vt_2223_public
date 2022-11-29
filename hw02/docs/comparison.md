@@ -14,8 +14,8 @@
 # esi (result): instruction
 movzx  esi,BYTE PTR [rdi+rsi*1]
 
-# rsp: start address of dispatch table
-# rsi: instruction (1 byte) (times 8 because pointer is 8 bytes)
+# rsp + 0x10: start address of dispatch table
+# rsi:        instruction (1 byte) (times 8 because pointer is 8 bytes)
 jmp    QWORD PTR [rsp+rsi*8+0x10]
 ```
 
