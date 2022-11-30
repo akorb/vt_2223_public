@@ -1,5 +1,17 @@
 #include "source_machine.h"
 
+/*
+ * This interpretation of "super events"
+ * deviates from the one actually meant in the lecture.
+ * The lecture means something like:
+ *
+ * switch (mergeOpCodes(inst1, inst2) {
+ *     case Inc3A_ClrA:
+ *         clrA(&machineState);
+ *         break;
+ * }
+ */
+
 void main_loop(const instruction_t *code, int size, machine_state_t machineState) {
     (void)size;
 
