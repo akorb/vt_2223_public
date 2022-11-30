@@ -20,7 +20,7 @@ void main_loop(const instruction_t *code, int size, machine_state_t machineState
 
             switch (inst) {
                 case HALT:
-                    machineState.ip++;
+                    halt(&machineState);
                     halt_machine = 1;
                     break;
                 case CLRA:
